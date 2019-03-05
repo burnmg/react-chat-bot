@@ -2,14 +2,20 @@
 import React from 'react'
 import { css } from 'glamor'
 
+
+
 class Header extends React.Component {
     render() {
         return (
             <div {...css(styles.container)}>
-                <h2 {...css(styles.title)}>Auth Demo</h2>
+                <h2 {...css(styles.title)}>Chat Bot</h2>
+
+
             </div>
         )
     }
+
+
 }
 
 const styles = {
@@ -23,7 +29,7 @@ const styles = {
         height: '80px',
         width: '100%',
         backgroundColor: '#4CAF50'
-    }
+    },
 }
 
 export default Header

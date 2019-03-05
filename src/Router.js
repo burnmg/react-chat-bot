@@ -13,6 +13,7 @@ import {
     Home,
     Route1
 } from './Home'
+import App from "./App";
 
 class PrivateRoute extends React.Component {
     state = {
@@ -68,8 +69,7 @@ const Routes = () => (
     <Router>
         <Switch>
             <Route path='/auth' component={Authenticator} />
-            <PrivateRoute path='/route1' component={Route1} />
-            <PrivateRoute path='/' component={Home} />
+            <PrivateRoute path='/' component={App} />
         </Switch>
     </Router>
 );

@@ -10,14 +10,14 @@ import SignUp from './SignUp.js'
 class Authenticator extends React.Component {
     state = {
         showSignIn: true
-    }
+    };
     switchState = (showSignIn) => {
         this.setState({
             showSignIn
         })
-    }
+    };
     render() {
-        const { showSignIn } = this.state
+        const { showSignIn } = this.state;
         return (
             <div>
                 {
@@ -58,4 +58,4 @@ const styles = {
     underline: {
         borderBottomColor: '#ddd'
     }
-}
+};

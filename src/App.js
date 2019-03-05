@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './style.css';
 import axios from 'axios'
+import {withRouter} from "react-router-dom";
+import { Auth } from 'aws-amplify'
+
 
 
 
@@ -11,15 +14,19 @@ import axios from 'axios'
 
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       messages: []
     };
     this.sendMessage = this.sendMessage.bind(this)
+    this.receiveMessage = this.receiveMessage.bind(this)
+    this.signOut = this.signOut.bind(this)
   }
 
   sendMessage(message_text){
+
+
     const message = {
       user: 'You',
       text: message_text
@@ -51,25 +58,45 @@ class App extends React.Component {
   }
 
   receiveMessage(response){
-    const message_text =  response.data.body.messages[0].unstructured.text;
-    console.log(message_text);
-    const message = {
-      user: 'Bot',
-      text: message_text
-    };
-    this.setState({
-      messages:[...this.state.messages, message]
-    })
+
+    console.log(response)
+    if("body" in response.data){
+      const message_text =  response.data.body.messages[0].unstructured.text;
+      console.log(message_text);
+      const message = {
+        user: 'Bot',
+        text: message_text
+      };
+      this.setState({
+        messages:[...this.state.messages, message]
+      })
+    }
+
+
+
   }
 
+  signOut(){
+    Auth.signOut()
+        .then(() => {
+          this.props.history.push('/auth')
+        })
+        .catch((err) => {
+          console.log(err);
+          alert('Sign out Error.')
+        })
+  }
 
 
   render() {
     return (
         <div className="app">
-          <Title />
+          <button onClick={this.signOut} style={{ height: 50, width: 200 }}>
+            Sign Out
+          </button>
           <MessageList
-              messages={this.state.messages} />
+          messages={this.state.messages} />
+
           <SendMessageForm
               sendMessage={this.sendMessage} />
         </div>
@@ -148,8 +175,5 @@ class SendMessageForm extends React.Component {
   }
 }
 
-function Title() {
-  return <p className="title">Chatbot</p>
-}
 
-export default App;
+export default withRouter(App);
