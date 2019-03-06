@@ -78,7 +78,7 @@ class App extends React.Component {
           messages:[...this.state.messages,
             {
               user:"Bot",
-              text: x.name + "   Address:" + x.location.address1+", "+x.location.city+", "+x.location.state+", "+x.location.country
+              text: "["+ x.name+"] Address:" + x.location.address1+", "+x.location.city+", "+x.location.state+", "+x.location.country
             }
             ]
           })
