@@ -40,24 +40,27 @@ html, body {
     margin: 15px 0;
 }
 
-.message div:nth-child(1) {
-    font-size: 5px;
+.message_human div:nth-child(1), .message_bot div:nth-child(1) {
+    font-size: 20px;
     color: var(--main-text-color);
     opacity: 0.9;
-    margin-bottom: 6px;
-}
+    margin-bottom: 10px;
+    padding: 3px 6px;
+ }
+
+
 .message_human div:nth-child(2) {
     background: deepskyblue;
     color: var(--secondary-color);
     display: inline;
-    padding: 3px 8px;
+    padding: 5px 8px;
     border-radius: 12px;
 }
 .message_bot div:nth-child(2) {
     background: darkgreen;
     color: var(--secondary-color);
     display: inline;
-    padding: 3px 8px;
+    padding: 5px 8px;
     border-radius: 15px;
 }
 
