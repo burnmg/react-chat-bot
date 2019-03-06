@@ -5,12 +5,14 @@ import { css } from 'glamor'
 
 
 class Header extends React.Component {
+    componentDidMount(){
+        document.title = "Yum Yum Yum"
+    }
+
     render() {
         return (
             <div {...css(styles.container)}>
-                <h2 {...css(styles.title)}>Chat Bot</h2>
-
-
+                <h2 {...css(styles.title)}>The Bot of Eat!</h2>
             </div>
         )
     }

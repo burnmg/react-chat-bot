@@ -4,20 +4,16 @@ import axios from 'axios'
 import {withRouter} from "react-router-dom";
 import { Auth } from 'aws-amplify'
 
-
-
-
-// const response = {
-//   user: 'Bot',
-//   text: "啊？"
-// };
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: []
+      messages: [
+          {
+          user:"Bot",
+          text:"Say \"Eat\"!"
+        }
+      ]
     };
     this.sendMessage = this.sendMessage.bind(this)
     this.receiveMessage = this.receiveMessage.bind(this)
@@ -123,15 +119,17 @@ class App extends React.Component {
   render() {
     return (
         <div className="app">
-          <button onClick={this.signOut} style={{ height: 50, width: 200 }}>
-            Sign Out
-          </button>
+
           <MessageList
           messages={this.state.messages} />
 
           <SendMessageForm
               sendMessage={this.sendMessage} />
+          <button onClick={this.signOut} style={{ height: 50, width: 200 }}>
+            Sign Out
+          </button>
         </div>
+
     );
   }
 }
@@ -188,8 +186,6 @@ class SendMessageForm extends React.Component {
     this.setState({
       message: ''
     })
-
-
   }
 
   render() {
