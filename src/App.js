@@ -59,17 +59,49 @@ class App extends React.Component {
 
   receiveMessage(response){
 
+
     console.log(response)
     if("body" in response.data){
-      const message_text =  response.data.body.messages[0].unstructured.text;
+      var message_text = response.data.body.messages[0].unstructured.text;
       console.log(message_text);
+
+      if("recommendations" in response.data.body.messages[0].unstructured){
+        const rec = JSON.parse(response.data.body.messages[0].unstructured.recommendations);
+        console.log(rec);
+        this.setState({
+          messages:[...this.state.messages,
+            {user:"Bot",
+              text:"Here is a list of recommended restaurants"
+            }]
+        })
+        rec.data.search.business.map((x) =>
+        {
+          console.log(x.name + "Address:" + x.location.address1+", "+x.location.city+", "+x.location.state+", "+x.location.country)
+
+          this.setState({
+          messages:[...this.state.messages,
+            {
+              user:"Bot",
+              text: x.name + "   Address:" + x.location.address1+", "+x.location.city+", "+x.location.state+", "+x.location.country
+            }
+            ]
+          })
+        })
+
+
+      }
+
       const message = {
         user: 'Bot',
         text: message_text
       };
+
       this.setState({
         messages:[...this.state.messages, message]
-      })
+      });
+
+
+
     }
 
 

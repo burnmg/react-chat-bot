@@ -22,7 +22,7 @@ class SignIn extends React.Component {
             })
             .catch(err => {
                 console.log('error signing in...: ', err);
-                alert("Sign In Error! check log. ")
+                alert("Check your username or password")
 
             })
     };
