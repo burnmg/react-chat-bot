@@ -45,7 +45,6 @@ html, body {
     color: var(--main-text-color);
     opacity: 0.9;
     margin-bottom: 6px;
-
 }
 .message_human div:nth-child(2) {
     background: deepskyblue;
@@ -86,6 +85,7 @@ html, body {
     margin: 0;
     background: var(--send-message-form);
     font-weight: 200;
+
 }
 
 .send-message-form input:focus {
