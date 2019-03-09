@@ -18,6 +18,8 @@ class App extends React.Component {
     this.sendMessage = this.sendMessage.bind(this)
     this.receiveMessage = this.receiveMessage.bind(this)
     this.signOut = this.signOut.bind(this)
+
+
   }
 
   sendMessage(message_text){
@@ -34,21 +36,36 @@ class App extends React.Component {
         messages:[...this.state.messages, message]
       });
 
-      axios.post('https://dhcygmkjfa.execute-api.us-east-1.amazonaws.com/prod/chatbot',
-          {
-            messages:[
-              {
-                type:"string",
-                unstructured:{
-                  id:"user1",
-                  text: message_text,
-                  timestamp: Date.now()
+      Auth.currentSession().then((res) => {
 
+        const token = res.idToken.jwtToken
+        console.log(token)
+        axios.post('https://dhcygmkjfa.execute-api.us-east-1.amazonaws.com/prod/chatbot',
+            {
+              messages:[
+                {
+                  type:"string",
+                  unstructured:{
+                    id:"user1",
+                    text: message_text,
+                    timestamp: Date.now()
+
+                  }
                 }
+              ]
+            },
+            {
+              headers:{
+                Authorization: token
               }
-            ]
-          })
-          .then(response => {this.receiveMessage(response); console.log(response)});
+            })
+            .then(response => {this.receiveMessage(response); console.log(response)});
+
+      });
+
+
+
+
     }
 
   }
