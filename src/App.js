@@ -39,7 +39,6 @@ class App extends React.Component {
       Auth.currentSession().then((res) => {
 
         const token = res.idToken.jwtToken
-        console.log(token)
         axios.post('https://dhcygmkjfa.execute-api.us-east-1.amazonaws.com/prod/chatbot',
             {
               messages:[
@@ -76,7 +75,6 @@ class App extends React.Component {
     console.log(response)
     if("body" in response.data){
       var message_text = response.data.body.messages[0].unstructured.text;
-      console.log(message_text);
 
       if("recommendations" in response.data.body.messages[0].unstructured){
         const rec = JSON.parse(response.data.body.messages[0].unstructured.recommendations);
